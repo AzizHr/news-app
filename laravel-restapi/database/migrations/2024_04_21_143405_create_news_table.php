@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('content');
-            $table->date('started_at');
-            $table->date('expired_at');
+            $table->date('started_at')->default(now());
+            $table->date('expired_at')->default(now()->addDays(7));
             $table->foreignId('category_id')->constrained()
             ->onUpdate('cascade')
             ->onDelete('cascade');
