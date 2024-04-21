@@ -15,5 +15,9 @@ class News extends Model
         'started_at',
         'expired_at',
         'category_id'
-    ]
+    ];
+
+    public function category() {
+        return $this->belongsTo(Category::class);
+    }
 }
