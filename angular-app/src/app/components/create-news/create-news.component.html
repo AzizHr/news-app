@@ -1,0 +1,44 @@
+<app-navbar></app-navbar>
+
+<form [formGroup]="createNewsForm" (ngSubmit)="onSubmit()" class="w-50 mx-auto mt-5">
+  <div class="d-flex justify-content-between align-items-center my-3">
+    <h3 class="">Publish some news</h3>
+    <a href="/news" class="d-flex align-items-center"><i class="fa-solid fa-arrow-left"></i>
+    <span class="ms-2">Back to news</span>
+    </a>
+  </div>
+  <div>
+    <label for="title" class="form-label mt-4">Title</label>
+    <input formControlName="title" type="text" class="form-control" id="title" placeholder="Enter News Title">
+    <p
+      *ngIf="isFieldValid('title', 'required')"
+      class="fs-6 text-danger mt-1"
+    >
+      Title is required
+    </p>
+    <p
+      *ngIf="isFieldValid('title', 'minlength')"
+      class="fs-6 text-danger mt-1"
+    >
+      Title must be at least 4 characters long
+    </p>
+  </div>
+  <div>
+    <label for="content" class="form-label mt-4">Content</label>
+    <textarea placeholder="News content goes here..." formControlName="content" class="form-control" id="content" rows="3" spellcheck="false"></textarea>
+    <p
+      *ngIf="isFieldValid('content', 'required')"
+      class="fs-6 text-danger mt-1"
+    >
+      Content is required
+    </p>
+  </div>
+  <div>
+    <label for="category" class="form-label mt-4">Category</label>
+    <select formControlName="category_id" class="form-select" id="category">
+      <option
+        *ngFor="let category of categories" [value]="category.id" [selected]="categories[0].id">{{ category.name }}</option>
+    </select>
+  </div>
+  <button type="submit" [disabled]="createNewsForm.invalid" class="btn btn-primary mt-4">Publish</button>
+</form>

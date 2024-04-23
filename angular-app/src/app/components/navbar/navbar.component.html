@@ -1,1 +1,37 @@
-<p>navbar works!</p>
+<div class="bs-component">
+  <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+    <div class="container">
+      <a class="navbar-brand" href="#">News</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarColor01">
+<!--        If user is not logged in-->
+        <ul *ngIf="!token" class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Register</a>
+          </li>
+        </ul>
+<!--        If user is logged in-->
+        <ul *ngIf="token" class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/news">News</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/news/publish">Publish news</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link">{{ loggedInUser.name }}</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-info" (click)="logout()">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>
