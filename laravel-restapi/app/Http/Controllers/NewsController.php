@@ -23,7 +23,9 @@ class NewsController extends Controller
 
     public function index()
     {
-        $news = News::with('category')->get();
+        $news = News::where('expired_at', '>', now())
+            ->orderBy('started_at', 'desc')
+            ->with('category')->paginate(6);
         return response()->json($news, 200);
     }
 
@@ -83,8 +85,12 @@ class NewsController extends Controller
     {
         $search = $request->input('search');
 
-        $news = News::where('title', 'like', "%$search%")
-            ->orWhere('content', 'like', "%$search%")
+        $news = News::where('expired_at', '>', now())
+            ->where(function ($query) use ($search) {
+                $query->where('title', 'like', "%$search%")
+                    ->orWhere('content', 'like', "%$search%")
+                    ->orderBy('started_at', 'desc');
+            })
             ->get();
 
         if ($news->isEmpty()) {

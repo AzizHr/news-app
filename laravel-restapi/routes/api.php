@@ -17,23 +17,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth')->get('/user', function (Request $request) {
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/news', [NewsController::class, 'index']);
-Route::get('/news/{id}', [NewsController::class, 'show']);
-Route::post('/news', [NewsController::class, 'store']);
-Route::delete('/news/{id}', [NewsController::class, 'destroy']);
-Route::put('/news/{id}', [NewsController::class, 'update']);
-Route::get('/search', [NewsController::class, 'search']);
+Route::middleware('auth:sanctum')->get('/news', [NewsController::class, 'index']);
+Route::middleware('auth:sanctum')->get('/news/{id}', [NewsController::class, 'show']);
+Route::middleware('auth:sanctum')->post('/news', [NewsController::class, 'store']);
+Route::middleware('auth:sanctum')->delete('/news/{id}', [NewsController::class, 'destroy']);
+Route::middleware('auth:sanctum')->put('/news/{id}', [NewsController::class, 'update']);
+Route::middleware('auth:sanctum')->get('/search', [NewsController::class, 'search']);
 
 
-Route::get('/categories', [CategoryController::class, 'index']);
-Route::get('/categories/search', [CategoryController::class, 'search']);
+Route::middleware('auth:sanctum')->get('/categories', [CategoryController::class, 'index']);
+Route::middleware('auth:sanctum')->get('/categories/filter', [CategoryController::class, 'filter']);
 
 Route::post('/auth/register',[AuthController::class,'register']);
 Route::post('/auth/login',[AuthController::class,'login']);
-Route::post('logout',[AuthController::class,'logout'])
-  ->middleware('auth');
+Route::post('/logout',[AuthController::class,'logout'])
+  ->middleware('auth:sanctum');
 
