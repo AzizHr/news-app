@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 import {NewsResponse} from "../../models/response/news-response";
 import {CategoryResponse} from "../../models/response/category-response";
 import {CategoryService} from "../../services/category/category.service";
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-edit-news',
@@ -31,8 +32,11 @@ export class EditNewsComponent implements OnInit {
     private categoryService: CategoryService,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
-    private router: Router
-  ) {}
+    private router: Router,
+    private titleService: Title)
+{
+  this.titleService.setTitle("Edit News")
+}
 
   ngOnInit(): void {
     this.categoryService.getAll().subscribe(

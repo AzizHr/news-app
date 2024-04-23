@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 import {AuthService} from "../../services/auth/auth.service";
 import {AuthRequest} from "../../models/request/auth-request";
 import Swal from "sweetalert2";
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-login',
@@ -22,7 +23,11 @@ export class LoginComponent {
 
   constructor(private formBuilder: FormBuilder,
               private router: Router,
-              private authService: AuthService) {}
+              private authService: AuthService,
+              private titleService: Title)
+  {
+    this.titleService.setTitle("Login To Your Account")
+  }
 
 
   isFieldValid(field: string, errorType: string): boolean {

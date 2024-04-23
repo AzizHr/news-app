@@ -4,6 +4,7 @@ import {NewsResponse} from "../../models/response/news-response";
 import {CategoryResponse} from "../../models/response/category-response";
 import {CategoryService} from "../../services/category/category.service";
 import Swal from "sweetalert2";
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-news',
@@ -27,7 +28,12 @@ export class NewsComponent implements OnInit {
   totalPages: number = 0;
   pages!: number[];
 
-  constructor(private newsService: NewsService, private categoryService: CategoryService) {}
+  constructor(private newsService: NewsService,
+              private categoryService: CategoryService,
+              private titleService: Title)
+  {
+    this.titleService.setTitle("Browse News")
+  }
 
   ngOnInit(): void {
     this.categoryService.getAll().subscribe(categories => {

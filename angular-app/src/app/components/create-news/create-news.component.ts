@@ -6,6 +6,7 @@ import {NewsService} from "../../services/news/news.service";
 import {NewsRequest} from "../../models/request/news-request";
 import {CategoryResponse} from "../../models/response/category-response";
 import {CategoryService} from "../../services/category/category.service";
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-create-news',
@@ -27,7 +28,11 @@ export class CreateNewsComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private router: Router,
               private newsService: NewsService,
-              private categoryService: CategoryService) {}
+              private categoryService: CategoryService,
+              private titleService: Title)
+  {
+    this.titleService.setTitle("Publish News")
+  }
 
 
   ngOnInit(): void {

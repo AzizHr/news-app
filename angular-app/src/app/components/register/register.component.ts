@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 import {AuthService} from "../../services/auth/auth.service";
 import Swal from "sweetalert2";
 import {RegisterRequest} from "../../models/request/register-request";
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-register',
@@ -23,7 +24,11 @@ export class RegisterComponent {
 
   constructor(private formBuilder: FormBuilder,
               private router: Router,
-              private authService: AuthService) {}
+              private authService: AuthService,
+              private titleService: Title)
+  {
+    this.titleService.setTitle("Create Your Account")
+  }
 
 
   isFieldValid(field: string, errorType: string): boolean {

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-index',
@@ -6,5 +7,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./index.component.css']
 })
 export class IndexComponent {
-
+  public constructor(private titleService: Title)
+  {
+    this.titleService.setTitle("Welcome To News App")
+  }
 }
